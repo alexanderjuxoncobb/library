@@ -1,0 +1,51 @@
+.card {
+  background-color: #ffeaa7; /* Soft pastel yellow */
+  border: 2px solid #fd79a8; /* Vibrant pink border */
+  border-radius: 20px; /* Rounded corners */
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2); /* Shadow for depth */
+  padding: 20px;
+  margin: 15px;
+  transition: transform 0.3s ease-in-out; /* Smooth animation */
+  font-family: "Comic Sans MS", cursive; /* Playful font */
+  text-align: center;
+  max-width: 300px;
+}
+
+.card:hover {
+  transform: rotate(3deg) scale(1.05); /* Tilt and grow effect on hover */
+  background-color: #fab1a0; /* Change to a quirky light pink on hover */
+}
+
+button.new-book {
+  position: fixed;
+  right: 400px;
+  height: 150px;
+  width: 300px;
+  margin: 50px;
+}
+
+button.submit {
+  position: fixed;
+  right: 400px;
+  top: 300px;
+  height: 50px;
+  width: 100px;
+  margin: 50px;
+}
+
+button {
+  height: 50px;
+  width: 50px;
+  margin: 20px;
+}
+
+input {
+  position: fixed;
+  right: 475px;
+  top: 300px;
+}
+label {
+  position: fixed;
+  right: 650px;
+  top: 300px;
+}
