@@ -1,22 +1,34 @@
 const myLibrary = [];
 
-function Book(name, author, read = false) {
-  this.name = name;
-  this.author = author;
-  this.read = read;
+// function Book(name, author, read = false) {
+//   this.name = name;
+//   this.author = author;
+//   this.read = read;
+// }
+
+class Book {
+  constructor(name, author, read = false) {
+    this.name = name;
+    this.author = author;
+    this.read = read;
+  }
+
+  addBookToLibrary() {
+    myLibrary.push(this);
+  }
 }
 
 const book1 = new Book("firstBook", "firstAuthor");
 const book2 = new Book("secondBook", "secondAuthor");
 
-addBookToLibrary(book1);
-addBookToLibrary(book2);
+book1.addBookToLibrary();
+book2.addBookToLibrary();
 
-function addBookToLibrary(book) {
-  myLibrary.push(book);
-}
+// function addBookToLibrary(book) {
+//   myLibrary.push(book);
+// }
 
-function displayLibrary(myLibrary) {
+function displayLibrary() {
   document.querySelectorAll(".card").forEach((card) => card.remove());
 
   myLibrary.forEach((book, index) => {
@@ -28,20 +40,18 @@ function displayBook(book, index) {
   let newBook = document.createElement("div");
   let remove = document.createElement("button");
   let read = document.createElement("button");
-
   let divWrapper = document.createElement("div");
 
   newBook.setAttribute("class", "card");
   newBook.textContent = `${book.name} by ${book.author}`;
 
   remove.innerHTML = "&times;";
-  remove.setAttribute("data-id", index);
-  console.log(index);
+  // remove.setAttribute("data-id", index);
+  // console.log(index);
   read.textContent = "read?";
-  read.setAttribute("data-id", index);
 
   remove.addEventListener("click", function () {
-    myLibrary.splice(remove.dataset.id, 1);
+    myLibrary.splice(index, 1);
     displayLibrary(myLibrary);
   });
   read.addEventListener("click", function () {
@@ -65,25 +75,26 @@ btn.addEventListener("click", function () {
   let title = document.createElement("input");
   let titleLabel = document.createElement("label");
   let submit = document.createElement("button");
+
   title.setAttribute("id", "title");
   titleLabel.setAttribute("for", "title");
   titleLabel.textContent = "Title";
   submit.setAttribute("class", "submit");
+
+  form.append(titleLabel, title, submit);
+  
   document.body.append(form);
-  form.appendChild(titleLabel);
-  form.appendChild(title);
-  form.append(submit);
 
   form.addEventListener("submit", function (event) {
     event.preventDefault();
     let titleValue = title.value;
     const newBook = new Book(titleValue, "CBA");
-    addBookToLibrary(newBook);
-    displayBook(newBook);
+    newBook.addBookToLibrary();
+    displayLibrary();
 
-    form.remove();
-    title.remove();
-    titleLabel.remove();
-    submit.remove();
+    form.remove(); // the form element contains all child elements anyway.
+    // title.remove();
+    // titleLabel.remove();
+    // submit.remove();
   });
 });
