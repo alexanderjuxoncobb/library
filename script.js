@@ -67,7 +67,7 @@ function displayBook(book, index) {
   newBook.append(divWrapper);
 }
 
-displayLibrary(myLibrary);
+displayLibrary();
 
 let btn = document.querySelector("button");
 btn.addEventListener("click", function () {
@@ -80,21 +80,34 @@ btn.addEventListener("click", function () {
   titleLabel.setAttribute("for", "title");
   titleLabel.textContent = "Title";
   submit.setAttribute("class", "submit");
+  // submit.setAttribute("type", "submit");
+  // title.setAttribute("required", "true");
 
   form.append(titleLabel, title, submit);
-  
+
   document.body.append(form);
 
   form.addEventListener("submit", function (event) {
     event.preventDefault();
     let titleValue = title.value;
-    const newBook = new Book(titleValue, "CBA");
-    newBook.addBookToLibrary();
-    displayLibrary();
 
-    form.remove(); // the form element contains all child elements anyway.
-    // title.remove();
-    // titleLabel.remove();
-    // submit.remove();
+    // console.log(!title.validity.valueMissing);
+
+    if (titleValue) {
+      const newBook = new Book(titleValue, "CBA");
+      newBook.addBookToLibrary();
+      displayLibrary();
+
+      form.remove(); // the form element contains all child elements anyway.
+    } else {
+      title.setCustomValidity("need to fill it in");
+      // title.reportValidity();
+    }
+  });
+
+  title.addEventListener("input", function () {
+    if (title.value) {
+      title.setCustomValidity("");
+    }
   });
 });
